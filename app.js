@@ -49,11 +49,11 @@ app.post('/contact/send', (req, res) => {
   
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-      host: 'mail.myquranjourney.net',
+      host: 'smtp.gmail.com',
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-          user: 'editor@myquranjourney.net', // generated ethereal user
+          user: 'afrocodez@gmail.com', // generated ethereal user
           pass: 'teedanjum'  // generated ethereal password
       },
       tls:{
@@ -63,7 +63,7 @@ app.post('/contact/send', (req, res) => {
   
     // setup email data with unicode symbols
     let mailOptions = {
-        from: '"Nodemailer Contact" <editor@myquranjourney.net>', // sender address
+        from: '"Nodemailer Contact" <afrocodez@gmail.com>', // sender address
         to: 'almustaphaauthor@gmail.com', // list of receivers
         subject: 'Node Contact Request', // Subject line
         text: 'Hello world?', // plain text body
