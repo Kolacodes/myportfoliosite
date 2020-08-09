@@ -90,6 +90,29 @@ template {
   display: none;
 }
 
+
+.fa-whatsapp{
+  z-index: 1;
+  margin-left: 80%;
+  top: 600px;
+  position: fixed;
+  color: lime;
+}
+
+
+.whatsappBtn{
+  z-index: 100;
+  /* border: white; */
+  margin-left: 80%;
+  top: 600px;
+  position: fixed;
+  color: lime;
+}
+
+
+
+
+
 /* Links
    ========================================================================== */
 /**
