@@ -1,6 +1,9 @@
 var express = require ("express"),
     port = process.env.PORT || 5000,
+
     nodemailer = require("nodemailer"),
+    xoauth2    = require('xoauth2'),
+
     methodOverride = require("method-override"),
     cookieParser        = require("cookie-parser"),
     flash      = require("connect-flash"),
@@ -46,39 +49,45 @@ app.post('/contact/send', (req, res) => {
       <h3>Message</h3>
       <p>${req.body.message}</p>
     `;
-  
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-      host: 'mail.myquranjourney.net',
-      port: 587,
-      secure: false, // true for 465, false for other ports
-      auth: {
-          user: 'editor@myquranjourney.net', // generated ethereal user
-          pass: 'teedanjum'  // generated ethereal password
-      },
-      tls:{
-        rejectUnauthorized:false
-      }
-    });
-  
-    // setup email data with unicode symbols
-    let mailOptions = {
-        from: '"Nodemailer Contact" <editor@myquranjourney.net>', // sender address
-        to: 'almustaphaauthor@gmail.com', // list of receivers
-        subject: 'Node Contact Request', // Subject line
-        text: 'Hello world?', // plain text body
-        html: output // html body
-    };
-  
-    // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        res.redirect("/");
 
-    });
-    });
+
+
+    // create reusable transporter object using the default SMTP transport
+    var transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+              type: 'OAuth2',
+              user: 'afrocodez@gmail.com',
+              clientId: '95046685331-jv7jrfoqo9vgfknqr54omae8qvi66b2p.apps.googleusercontent.com',
+              clientSecret: 'NDDuk-uEfjs64m67XsbGM2QP',
+              refreshToken: '1//04qWvM4asMAt0CgYIARAAGAQSNwF-L9IrIhqKxBdGwJBG0lziLlKJxF-HAsajJmDDJfj4c65Ljf7Ye20G-Y58cZBCA_lMFj1x0Pk'
+      }
+  })
+  
+
+
+ // setup email data with unicode symbols
+  var mailOptions = {
+      from: 'My Name <afrocodez@gmail.com>',
+      to: 'almustaphaauthor@gmail.com',
+      subject: 'Nodemailer Email',
+      text: 'Hello World!!',
+      html: output // html body
+  }
+
+    // send mail with defined transport object
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
+    }
+    res.redirect("/");
+
+});
+  
+  
+});
 
 
 
@@ -86,3 +95,4 @@ app.post('/contact/send', (req, res) => {
 app.listen(port, function(){
     console.log("The Portfolio server just started")
 });
+
